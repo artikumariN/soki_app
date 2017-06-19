@@ -1,0 +1,17 @@
+<div class="bills directive">
+    <div class="list">
+        <div class="item item-divider">
+            Current Outstanding
+        </div>
+        <div class="item row" ng-repeat="item in bills.data track by $index">
+            <div class="col col-75">
+                <h2>{{item.refName}}</h2>
+                <p class="inline-item">{{item.txDate}}</p>
+                <p class="inline-item">{{item.txNo}}</p>
+            </div>
+            <div class="col col-center">
+                <h3 class="sk-price">Rs. {{item.amount}}</h3>
+            </div>
+        </div>
+    </div>
+</div>

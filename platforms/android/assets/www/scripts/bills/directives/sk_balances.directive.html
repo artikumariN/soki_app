@@ -1,0 +1,149 @@
+
+<div class="bills directive">
+  <ion-content style="position:inherit">
+    <ion-refresher on-refresh="bills.refreshList()" ng-if="!bills.hidePtr"></ion-refresher>
+    <div class="list" ng-if="bills.filter === 'balances'">
+        <div class="item item-divider" ng-if="!bills.showTitle">
+            CURRENT OUTSTANDING
+        </div>
+       <div class="item row" ng-repeat="item in bills.data | filter: bills.filterAccess | filter:bills.selected.property.occuId | filter:bills.selected.society.id">
+            <div class="col col-10 col-center">
+                <i class="fa" ng-class="bills.getPropIcon(item.nature)" aria-hidden="true"></i>
+            </div>
+            <div class="col col-center">
+                <h2>{{ item.displayAs }}</h2>
+                <small>Soc Name ... pending {{item.socId}}</small>
+                <p>{{item.owner }}</p>
+            </div>
+            <div class="col col-40 col-center">
+
+                <a class="button button-light sk-status" ui-sref="menu.makePayment({id: item.id, balance:item.balance ,currency:item.currency})">
+                    Pay
+                    <sk-amount amount="item.balance" show-color="true" currency="item.currency"></sk-amount>
+                    <!-- <i ng-if = "item.currency == 'INR'" class="fa fa-rupee"></i>
+                    <span ng-if = "item.currency != 'INR'">{{item.currency}}</span>
+                    {{item.balance}} -->
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- // End Balances -->
+    <div class="list" ng-if="bills.filter === 'payments'">
+
+        <div class="item item-divider" ng-if="bills.thisMonth" ng-if="!bills.showTitle">
+            THIS MONTH
+        </div>
+        <div class="item row" ng-repeat="item in (filteredItems = (bills.thisMonth | filter:bills.selected.society.id | filter:bills.selected.property.occuId))">
+          
+          <div class="col col-10 col-top">
+              <i class="fa" ng-class="bills.getPropIcon(item.transMode)" aria-hidden="true"></i>
+          </div>
+          <div class="col col-67">
+              <h2>{{item.transType == 6 ? item.transBank || 'N/A' : 'Payment'}}  <p class="inline-item calm-text">{{item.transMode}}</p></h2>
+              <p>Ref#
+                  {{item.transNo}}  {{item.transDate | date:'mediumDate'}}</p>
+
+              <!-- <i class="fa fa-home small"></i> -->
+              <!-- <p class="inline-item">{{item.txNo}}</p> -->
+
+
+          </div>
+          <div class="col col-center">
+              <sk-amount amount="item.amount" show-color="true" currency="item.currency"/>
+          </div>
+        </div>
+        <div ng-if="filteredItems && (!filteredItems.length || filteredItems.length == 0)">
+             <div class="item row">
+                 <div class="col"><span>Nothing to show here</span></div>
+             </div>
+        </div>
+        <div class="item item-divider" ng-if="bills.earlier">
+            Earlier
+        </div>
+        <div class="item row" ng-repeat="item in (filteredItems2 = (bills.earlier | filter:bills.selected.society.id | filter:bills.selected.property.occuId))">
+            <div class="col col-10 col-top">
+                <i class="fa" ng-class="bills.getPropIcon(item.transMode)" aria-hidden="true"></i>
+            </div>
+            <div class="col col-67">
+                <h2>{{item.transType == 6 ? item.transBank || 'N/A' : 'Payment'}}  <p class="inline-item calm-text">{{item.transMode}}</p></h2>
+                <p>Ref#
+                    {{item.transNo}}  {{item.transDate | date:'mediumDate'}}</p>
+
+                <!-- <i class="fa fa-home small"></i> -->
+                <!-- <p class="inline-item">{{item.txNo}}</p> -->
+
+
+            </div>
+            <div class="col col-center">
+                <sk-amount amount="item.amount" show-color="true" currency="item.currency"/>
+            </div>
+        </div>
+        <div ng-if="filteredItems2 && (!filteredItems2.length || filteredItems2.length == 0)">
+            <div class="item row">
+                 <div class="col"><span>Nothing to show here</span></div>
+             </div>
+        </div>
+
+    </div>
+
+    <div class="list" ng-if="bills.filter === undefined || bills.filter === 'all'">
+        <div class="item item-divider" ng-if="bills.thisMonth" ng-if="!bills.showTitle">
+            THIS MONTH
+        </div>
+        <div class="item row" ui-sref = "menu.webview({url:item.url , title:(item.type +' '+ item.txNo)})" ng-repeat="item in (filteredItems = (bills.thisMonth | filter:bills.selected.society.id | filter:bills.selected.property.occuId))">
+            <div class="col col-10">
+                <i class="fa" ng-class="bills.getPropIcon(item.type)" aria-hidden="true"></i>
+            </div>
+            <div class="col col-67">
+                <p class="inline-item">{{item.txDate | date:'mediumDate'}}</p>
+
+                <p class="inline-item calm-text">{{item.type}}</p>
+                <p>
+                    {{item.refName}}
+                    <span ng-if="item.refName" class="fa fa-bullseye" style="font-size: 10px"></span>
+                    <span>{{item.txDate | date:'mediumDate'}}</span>
+                </p>
+
+            </div>
+            <div class="col col-center">
+                <!-- <h3 class="sk-price">
+                    <i class="fa fa-rupee"></i>
+                    {{item.amount}}</h3> -->
+                    <sk-amount amount="item.amount" show-color="true" currency="item.currency"/>
+            </div>
+        </div>
+        <div ng-if="filteredItems && (!filteredItems.length || filteredItems.length == 0)">
+             <div class="item row">
+                 <div class="col"><span>Nothing to show here</span></div>
+             </div>
+        </div>
+        <div class="item item-divider" ng-if="bills.earlier">
+            Earlier
+        </div>
+        <div class="item row"  ui-sref = "menu.webview({url:item.url , title: (item.type+' '+item.txNo)})" ng-repeat="item in (filteredItems2 = (bills.earlier | filter:bills.selected.society.id | filter:bills.selected.property.occuId))">
+            <div class="col col-10 col-top">
+                <i class="fa" ng-class="bills.getPropIcon(item.type)" aria-hidden="true"></i>
+            </div>
+            <div class="col col-67">
+                <h2>{{item.refName}}</h2>
+                <p class="inline-item">{{item.txDate | date:'mediumDate'}}</p>
+                <p class="inline-item calm-text">{{item.type}}</p>
+                <!-- <i class="fa fa-home small"></i> -->
+                <!-- <p class="inline-item">{{item.txNo}}</p> -->
+                <p>Ref#
+                    {{item.refNo}}</p>
+
+            </div>
+            <div class="col col-center">
+                <sk-amount amount="item.amount" show-color="true" currency="item.currency"/>
+            </div>
+        </div>
+        <div ng-if="filteredItems2 && (!filteredItems2.length || filteredItems2.length == 0)">
+            <div class="item row">
+                 <div class="col"><span>Nothing to show here</span></div>
+             </div>
+        </div>
+
+    </div>
+  </ion-content>
+</div>

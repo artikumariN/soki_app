@@ -1,0 +1,34 @@
+<ion-view title="Make Payment" class="payment soki-page">
+    <ion-content class="soki-view">
+        <h3 class="padding">HOW MUCH WOULD YOU LIKE TO PAY?</h3>
+
+        <div class="row">
+            <div class="col padding">
+                <div class="h-lite padding {{mp.toggle.amount.current}}" ng-click="mp.toggleActive('current','amount')">
+                    <span>Current Outstanding</span>
+                    <label class="item item-input">
+                        <span class="input-label">
+                          <!-- Rs. {{mp.balanceAmt}} -->
+                          <sk-amount currency="mp.currency" show-color="false" amount="mp.balanceAmt"></sk-amount>
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <div class="col padding">
+                <div class="h-lite padding {{mp.toggle.amount.other}}" ng-click="mp.toggleActive('other','amount')">
+                    <span>Other Amount</span>
+                    <label class="item item-input">
+                        <span class="input-label"><i class="fa" ng-class="mp.getIcon(mp.currency)"></i>{{mp.getIcon(mp.currency)? '' : mp.currency}}
+                        </span>
+                        <input type="number" inputmode="numeric" ng-model="mp.otherAmt" name="otherAmt" required>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="padding">PAY VIA</h3>
+        <!-- Payment Mode -->
+        <sk-payment-select sk-access-id="mp.accessId" sk-balance = "mp.otherAmt" sk-currency="mp.currency"></sk-payment-select>
+
+    </ion-content>
+</ion-view>

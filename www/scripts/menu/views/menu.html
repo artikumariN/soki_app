@@ -1,0 +1,63 @@
+<ion-side-menus enable-menu-with-back-views="true">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-positive">
+            <!-- <ion-nav-back-button></ion-nav-back-button> -->
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menu-view"></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left" id="side-menu" width="310" class="soki-sidemenu">
+        <ion-content padding="false" class="side-menu-left">
+            <ion-list>
+                <!-- User Profile -->
+                <div class="item item-avatar item-button-right" href="#">
+                    <img ng-src="{{menu.userProfile.photoUrl}}">
+                    <h2>{{menu.userProfile.displayName}}</h2>
+                    <p>{{menu.userProfile.email}}</p>
+                    <p>{{menu.userProfile.mobile}}</p>
+                    <button class="button transparent">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                </div>
+
+                <!-- Ion Menus -->
+                <ion-item ui-sref="menu.dashboard" ui-sref-active="active" menu-close="">
+                    <i class="fa fa-tachometer"></i>Dashboard</ion-item>
+                <ion-item ui-sref="menu.bills" ui-sref-active="active" menu-close="">
+                    <i class="fa fa-clipboard"></i>Bills & Payments</ion-item>
+                <ion-item ui-sref="menu.updates" ui-sref-active="active" menu-close="">
+                    <i class="fa fa-stack-exchange"></i>Events & Updates</ion-item>
+                <!-- <ion-item ui-sref="menu.events" menu-close=""><i class="fa fa-calendar"></i>Events</ion-item> -->
+                <ion-item ui-sref="menu.neighbours" ui-sref-active="active" menu-close="">
+                    <i class="fa fa-address-book"></i>Neighbours</ion-item>
+                <ion-item ui-sref="menu.tickets" ui-sref-active="active" menu-close="">
+                    <i class="fa fa-flag"></i>Tickets</ion-item>
+            </ion-list>
+
+            <!-- Societies and Properties -->
+            <div class="societies">
+                <span class="header">
+                    Societies & Properties
+                    <button class="margin-t--sm" ui-sref="menu.access" menu-close="">MANAGE</button>
+                </span>
+
+                <ion-list>
+                    <div class="society" ng-repeat="society in menu.societies track by $index" ng-if="society.isActive">
+                        <div class="item header"><i class="fa fa-users"></i> {{society.name}}</div>
+                        <ion-item class="item" ui-sref="menu.properties({propId: prop.propId})" ui-sref-active="active" menu-close="" ng-repeat="prop in society.accessPoints track by $index" ng-if="prop.propId">
+                            <i class="fa" ng-class="menu.getPropIcon(prop.property.nature)"></i>{{prop.property.type}}
+                            #{{prop.property.name}}
+                        </ion-item>
+                    </div>
+                </ion-list>
+            </div>
+
+            <ion-item ui-sref="menu.settings" ui-sref-active="active" menu-close="">
+                <i class="fa fa-cog"></i>Settings</ion-item>
+            <ion-item ui-sref="menu.help" ui-sref-active="active" menu-close="">
+                <i class="fa fa-question"></i>Help</ion-item>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

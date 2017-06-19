@@ -1,0 +1,54 @@
+<ion-view class="soki-page property-details">
+    <ion-nav-title>
+        <i class="fa" ng-class="prop.getPropIcon(prop.selected.property.property.nature)"></i>
+        {{prop.selected.property.property.name}}
+        #
+        {{prop.selected.society.name}}
+    </ion-nav-title>
+
+    <ion-content scroll="false">
+        <ion-tabs class="tabs-stable tabs-top soki-tabs">
+            <ion-tab title="HOME">
+                <ion-content>
+                    <div class="header">
+                        <div class="property-name">
+                            <h1>{{prop.selected.society.name}}</h1>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <button class="button button-block button-positive">
+                            Invite your Neighbours
+                        </button>
+                        <div class="list">
+                            <div class="item item-divider">
+                                <h2>Your Properties</h2>
+                            </div>
+                            <div class="item item-icon-left item-icon-right" ng-if="p.property.name" ng-repeat="p in prop.selected.society.accessPoints track by $index">
+                                <i class="icon fa" ng-class="prop.getPropIcon(p.property.nature)"></i>
+                                {{p.property.type}}
+                                #
+                                {{p.property.name}}
+                                <i class="icon material-icons">keyboard_arrow_right</i>
+                            </div>
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-tab>
+            <ion-tab title="MEMBERS">
+                <ion-content class="padding">
+                    <h2>MEMBERS</h2>
+                </ion-content>
+            </ion-tab>
+            <ion-tab title="ACTIVITIES">
+                <ion-content>
+                    <h2>ACTIVITIES</h2>
+                </ion-content>
+            </ion-tab>
+            <ion-tab title="ISSUES">
+                <ion-content>
+                    <h2>ISSUES</h2>
+                </ion-content>
+            </ion-tab>
+        </ion-tabs>
+    </ion-content>
+</ion-view>

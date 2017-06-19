@@ -1,0 +1,88 @@
+<div class="signup-directive">
+    <div class="signup-box card">
+        <div class="item item-divider">
+
+
+            <!--<img src="images/app/logo.png" class="logo" alt="Societywise" />-->
+            <div class="header">
+                Create your account, free!
+                <span class="close fa fa-close" ui-sref="login"></span>
+            </div>
+            <div class="subheader">
+                Signup to find or add your society
+            </div>
+        </div>
+        <div class="signup-form item">
+            <form name="signup" ng-submit="log.doSignup(signup)">
+                <div class="list" style="padding-bottom: 0px;">
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Name</span>
+                        <input type="text" placeholder="Name (First Last)" ng-model="log.name" name="name" ng-minlength="10">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Mobile</span>
+                        <input type="number" placeholder="Mobile (e.g. 9999999999)" ng-model="log.mobile" name="mobile" ng-minlength="10" ng-maxlength="10" required>
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Email</span>
+                        <input type="email" placeholder="Email (this will be your username)" ng-model="log.user" name="email" ng-minlength="10" ng-maxlength="255" required>
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Password</span>
+                        <input type="password" placeholder="Password (1 letter and 1 number required)" ng-model="log.pass" name="password" ng-minlength="6" ng-pattern="'^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'" required>
+                    </label>
+                    <div class="item error-block" style="color:red" ng-if="!signup.$pristine && (signup.$invalid || log.serverSideErrorMessage)">
+                        <!--<p ng-if="log.error">{{log.error}}</p>-->
+
+                        <p style="color:red" ng-if="log.serverSideErrorMessage">{{log.serverSideErrorMessage}}</p>
+                        <p style="color:red" ng-if="signup.name.$dirty && signup.name.$error.required">Name is required</p>
+                        <p style="color:red" ng-if="signup.mobile.$dirty && signup.mobile.$error.required">Mobile is required</p>
+                        <p style="color:red" ng-if="signup.email.$dirty && signup.email.$error.required">Email is required</p>
+                        <p style="color:red" ng-if="signup.password.$dirty && signup.password.$error.required">Password is required</p>
+
+
+                        <p style="color:red" ng-if="signup.email.$dirty && signup.email.$invalid && !signup.email.$pristine">Enter a valid email like someone@place.com</p>
+                        <p style="color:red" ng-if="signup.email.$dirty && signup.email.$error.minlength">Email must be 10 characters long</p>
+                        <p style="color:red" ng-if="signup.email.$dirty && signup.email.$error.maxlength">Email can't exceed 255 characters</p>
+                        <p style="color:red" ng-if="signup.name.$dirty && signup.name.$error.minlength">name must be longer than 10 characters</p>
+                        <p style="color:red" ng-if="signup.mobile.$dirty && (signup.mobile.$error.minlength || signup.mobile.$error.maxlength)">mobile number must be of 10 digits</p>
+                        <p style="color:red" ng-if="signup.password.$dirty && signup.password.$error.minlength">Password must be longer than 6 characters</p>
+                        <p style="color:red" ng-if="signup.password.$dirty && signup.password.$invalid">At least 1 letter & 1 number required</p>
+                    </div>
+                    <div class="row" style="margin-top:15px;">
+                        <div id="u63_state0" class="panel_state" data-label="Checked">
+                            <div id="u63_state0_content" class="panel_state_content">
+
+                                <!-- Unnamed (Shape) -->
+                                <div id="u64" class="ax_shape">
+                                    <img ng-hide="checkbox" id="u64_img" ng-click="checkbox = !checkbox" style="left: 0px;top: 0px;width: 19px;height: 20px;margin-right:5px;"
+                                        src="images/app/u64.png">
+                                    <img ng-show="checkbox" id="u64_img" ng-click="checkbox = !checkbox" style="left: 0px;top: 0px;width: 19px;height: 20px;margin-right:5px;"
+                                        src="images/app/u64a.png">
+                                    <!-- Unnamed () -->
+                                    <!--<div id="u65" class="text">
+                                <p><span></span></p>
+                            </div>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <small style="color:#666666;  font-size:12px; white-space: initial;">I agree to the SocietyWise&nbsp;
+                                <a  style="color:#54223C;  font-size:12px;" href="https://societywise.in/legal#/terms-of-use" target="_blank">Terms & Conditions</a>
+                            </small>
+                        </div>
+                    </div>
+                    <!--<div class="spacer-m-md"></div>-->
+                    <div class="row">
+                        <div class="col">
+                            <button class="button button-block button-small button-positive" ng-disabled="!checkbox || signup.$invalid" type="submit">Sign up</button>
+                        </div>
+                        <div class="col center">
+                            <a ui-sref="login" style="line-height:5;float:right;text-decoration:none">Have an account?</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

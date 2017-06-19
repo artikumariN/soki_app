@@ -1,0 +1,28 @@
+
+<div class="tickets directive">
+  <ion-content>
+    <ion-refresher on-refresh="tickets.refreshList()"></ion-refresher>
+      <div class="list">
+        <!-- <div class="item item-divider">
+            All Tickets
+        </div> -->
+
+        <div class="item row" ng-repeat="item in tickets.data | filter:tickets.selected.society.id | filter:tickets.selected.property.occuId track by $index">
+        <!-- <div class="item row" ng-repeat="item in tickets.data"> -->
+            <div class="col col-10 col-top">
+                <i class="fa" ng-class="tickets.getPropIcon(item.type)" aria-hidden="true"></i>
+            </div>
+            <div class="col col-67">
+                <h2>{{item.headline}}</h2>
+                <p>{{item.description}}</p>
+                <p class="inline-item">{{item.category}}</p>
+                <p class="inline-item">{{item.type}}</p>
+            </div>
+            <div class="col col-center">
+                <h3 class="sk-status">
+                    {{item.status}}</h3>
+            </div>
+        </div>
+    </div>
+  </ion-content>
+</div>

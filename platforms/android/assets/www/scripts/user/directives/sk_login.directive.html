@@ -1,0 +1,38 @@
+<div class="login-directive">
+    <div class="login-box card">
+        <div class="heading item item-divider">
+            <img src="images/app/logo.png" class="logo" alt="Societywise" />
+        </div>
+        <div class="login-form item item-text-wrap">
+          <div class="margin-b-md">
+            Signin to your account
+          </div>
+            <form name="login" ng-submit="log.doLogin()">
+                <div class="list">
+                    <label class="item item-input">
+                        <input type="text" placeholder="User Name" ng-model="log.user">
+                    </label>
+                    <label class="item item-input">
+                        <input type="password" placeholder="Password" ng-model="log.pass">
+                    </label>
+                    <div class="item" ng-if="log.error" style="color:red">
+                      {{log.error}}
+                    </div>
+                    <div class="spacer-m-md"></div>
+                    <div class="row">
+                      <div class="col">
+                        <button class="button button-block button-small button-positive login-btn" type="submit">Login</button>
+                      </div>
+                      <div class="col align-right col-center">
+                        Forgot password?
+                      </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card signup-box padding-md">
+      <h4><strong>New here?</strong> Take your society online</h4>
+      <button ui-sref="signup" class="button button-block button-calm">SIGNUP FREE</button>
+    </div>
+</div>

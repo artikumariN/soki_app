@@ -1,0 +1,26 @@
+<div class="item item-divider" ng-if="!bills.showTitle">
+    CURRENT OUTSTANDING
+</div>
+<p>HEllo</p>
+<div ng-repeat="society in bills.societiesList  | filter:bills.selected.society.id track by $index">
+    asss
+     <div class="item row" ng-repeat="item in society.accessPoints | filter: bills.filterAccess | filter:bills.selected.property.propId">
+        <div class="col col-10 col-center">
+            <i class="fa" ng-class="bills.getPropIcon(item.property.nature)" aria-hidden="true"></i>
+        </div>
+        <div class="col col-center">
+            <h2>{{ item.property.displayAs }}</h2>
+            <small>{{society.name}}</small>
+            <p>{{item.property.owner }}</p>
+        </div>
+        <div class="col col-40 col-center">
+            <a class="button button-light sk-status" ng-disabled="{{item.balance <= 0}}" ui-sref="menu.makePayment({id: item.id, balance:item.property.balance ,currency:item.property.currency})">
+                Pay
+                <sk-amount amount="item.property.balance" show-color="true" currency="item.property.currency"></sk-amount>
+                <!-- <i ng-if = "item.property.currency == 'INR'" class="fa fa-rupee"></i>
+                <span ng-if = "item.property.currency != 'INR'">{{item.property.currency}}</span>
+                {{item.property.balance}} -->
+            </a>
+        </div>
+    </div>
+</div>

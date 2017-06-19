@@ -1,0 +1,26 @@
+<ion-view title="Bills & Payments" class="soki-page">
+    <soc-selector sk-title="All Societies & Properties"></soc-selector>
+
+    <ion-content class="soki-view has-subheader" scroll="false">
+
+        <ion-tabs class="tabs-stable tabs-top soki-tabs" animation="slide-left-right">
+            <ion-tab title="SUMMARY">
+                <ion-content>
+                    <sk-bills hide-paid="false" filter="balances"></sk-bills>
+                </ion-content>
+            </ion-tab>
+            <ion-tab title="IN PROCESS">
+                <ion-content>
+                    <sk-bills hide-paid="true" filter="payments"></sk-bills>
+                </ion-content>
+            </ion-tab>
+            <ion-tab title="ALL">
+                <!-- <ion-nav-view name="allBills"></ion-nav-view> -->
+                <ion-content>
+                  <sk-bills></sk-bills>
+                </ion-content>
+            </ion-tab>
+        </ion-tabs>
+
+    </ion-content>
+</ion-view>

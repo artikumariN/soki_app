@@ -1,0 +1,151 @@
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link rel="manifest" href="manifest.json">
+
+
+    <script>
+    var namespace = 'main';
+    </script>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link rel="shortcut icon" href="">
+    <link href="lib/angular-loading-bar/src/loading-bar.css" rel="stylesheet">
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="lib/angular-loading-bar/build/loading-bar.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/pouchdb/dist/pouchdb.min.js"></script>
+    <script src="lib/angular-pouchdb/angular-pouchdb.min.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="lib/ionic-native-transitions/dist/ionic-native-transitions.min.js"></script>
+    <script src="lib/angular-loading-bar/build/loading-bar.min.js"></script>
+    <script src="lib/ngMessage/ngMessage.js"></script>
+    <script src="lib/ngstorage/ngStorage.min.js"></script>
+    <script src="lib/ng-file-upload/ng-file-upload.min.js"></script>
+
+
+    <script src="scripts/db_storage/index.js"></script>
+    <script src="scripts/db_storage/values/db_config.value.js"></script>
+    <script src="scripts/db_storage/services/db.service.js"></script>
+
+    <script src="scripts/utils/index.js"></script>
+    <script src="scripts/utils/services/date.service.js"></script>
+    <script src="scripts/utils/services/icon.service.js"></script>
+    <script src="scripts/utils/services/sort.service.js"></script>
+
+    <script src="scripts/user/index.js"></script>
+    <script src="scripts/user/values/skv_details.value.js"></script>
+    <script src="scripts/user/services/authentiation.service.js"></script>
+    <script src="scripts/user/services/user.service.js"></script>
+    <script src="scripts/user/directives/sk_signup.directive.js"></script>
+    <script src="scripts/user/directives/sk_login.directive.js"></script>
+
+
+    <script src="scripts/api/index.js"></script>
+    <script src="scripts/api/services/url.service.js"></script>
+    <script src="scripts/api/services/dataserver.service.js"></script>
+    <script src="scripts/api/values/urls.value.js"></script>
+
+
+    <script src="scripts/app/index.js"></script>
+    <script src="scripts/app/values/societies.value.js"></script>
+    <script src="scripts/app/services/society.service.js"></script>
+    <script src="scripts/app/services/currency.service.js"></script>
+    <script src="scripts/app/services/message.service.js"></script>
+    <script src="scripts/app/directives/sk_app.directive.js"></script>
+    <script src="scripts/app/directives/sk_amount.directive.js"></script>
+    <script src="scripts/app/directives/soc_selector.directive.js"></script>
+    <script src="scripts/app/directives/sk_section.directive.js"></script>
+
+    <script src="scripts/access/index.js"></script>
+    <script src="scripts/access/controllers/access.controller.js"></script>
+    <script src="scripts/access/controllers/access.controller.js"></script>
+    <script src="scripts/access/directives/sk_access.directive.js"></script>
+    <script src="scripts/access/services/access.service.js"></script>
+
+    <script src="scripts/bills/index.js"></script>
+    <script src="scripts/bills/controllers/make_payment.controller.js"></script>
+    <script src="scripts/bills/directives/sk_balances.directive.js"></script>
+    <script src="scripts/bills/services/bills.service.js"></script>
+
+
+    <script src="scripts/neighbours/index.js"></script>
+    <script src="scripts/neighbours/services/neighbours.service.js"></script>
+    <script src="scripts/neighbours/directives/sk_neighbours.directive.js"></script>
+
+    <script src="scripts/dashboard/index.js"></script>
+    <script src="scripts/dashboard/controllers/dashboard.controller.js"></script>
+
+    <script src="scripts/help/index.js"></script>
+
+    <script src="scripts/menu/index.js"></script>
+    <script src="scripts/menu/controllers/menu_ctrl.controller.js"></script>
+    <script src="scripts/menu/controllers/menu_webview.controller.js"></script>
+
+
+
+
+    <script src="scripts/payments/index.js"></script>
+    <script src="scripts/payments/directives/sk_payment_select.directive.js"></script>
+
+
+    <script src="scripts/properties/index.js"></script>
+    <script src="scripts/properties/controllers/property.controller.js"></script>
+
+    <script src="scripts/tickets/index.js"></script>
+    <script src="scripts/tickets/directives/sk_tickets.directive.js"></script>
+    <script src="scripts/tickets/services/tickets.service.js"></script>
+    <script src="scripts/tickets/controllers/ticket_details.controller.js"></script>
+    <script src="scripts/tickets/controllers/add_ticket.controller.js"></script>
+    <script src="scripts/tickets/controllers/ticketList.controller.js"></script>
+
+
+    <script src="scripts/updates/index.js"></script>
+    <script src="scripts/updates/directives/sk_updates.directive.js"></script>
+    <script src="scripts/updates/services/updates.service.js"></script>
+
+
+    <script src="scripts/settings/index.js"></script>
+
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="scripts/main.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+  </head>
+
+
+  <body class="platform-cordova" animation="slide-left-right-ios7">
+    <!--[if lt IE 7]> <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p> <![endif]-->
+
+    <sk-app></sk-app>
+    <!-- <ion-nav-view></ion-nav-view> -->
+    <!-- <script src="cordova.js"></script> -->
+    <!-- <script src="scripts/bundle.js"></script> -->
+    <script>
+        angular.element(document).ready(function() {
+            if (window.cordova) {
+                console.log("Running in Cordova, will bootstrap AngularJS once 'deviceready' event fires.");
+                document.addEventListener('deviceready', function() {
+                    console.log("Deviceready event has fired, bootstrapping AngularJS.");
+                    angular.bootstrap(document, ['main']);
+                }, false);
+            } else {
+                console.log("Running in browser, bootstrapping AngularJS now.");
+                angular.bootstrap(document, ['main']);
+            }
+        });
+    </script>
+</body>
+</html>

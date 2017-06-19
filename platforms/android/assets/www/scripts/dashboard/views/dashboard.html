@@ -1,0 +1,38 @@
+<ion-view view-title="Dashboard" class="soki-page">
+
+    <soc-selector sk-title="All Societies & Properties"></soc-selector>
+    <ion-content class="soki-view has-subheader">
+
+        <div class="banner-container">
+            <img src="images/app/banner.jpg" class="banner" alt="banner"/>
+        </div>
+
+        <div class="card">
+            <div class="item item-divider">
+                <h2>Pending Bills</h2>
+            </div>
+            <div class="item item-list">
+                <sk-bills filter="balances" list-only="" show-title="false" hide-paid="true" hide-ptr="true"></sk-bills>
+                <div class="item item-divider-block">
+                    <button class="button button-block button-stable" ui-sref="menu.bills({tab:'all'})">
+                        <h2 style="float: left;font-weight: 700;">{{'Bills & Payments' | uppercase}}</h2>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="item item-divider">
+                <h2>What's happening</h2>
+            </div>
+            <div class="item item-list">
+                <sk-updates show-title="false"></sk-updates>
+                <div class="item item-divider-block">
+                    <button class="button button-block button-stable" ui-sref="menu.updates">
+                        {{'All Events & Updates' | uppercase}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

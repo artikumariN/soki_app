@@ -1,0 +1,108 @@
+<ion-view title="Add Ticket" class="soki-page" cache-view="false">
+  <soc-selector sk-title="All Societies & Properties"></soc-selector>
+    <ion-content class="soki-view  has-subheader">
+      <form name="addTicketForm">
+        <div class="list add-ticket">
+            <!-- <label class="item item-input item-stacked-label">
+              <span class="input-label">AccessId</span>
+              <input ng-model="tkt.accessId" type="text">
+          </label> -->
+            <!--<ion-item>
+                <ion-label>Type</ion-label>
+                <ion-select ng-model="tkt.type">
+                    <ion-option ng-repeat="option in tkt.options | filter:{opt_group:'ticket_type'}" value="{{option.id}}">{{option.name}}</ion-option>
+                </ion-select>
+            </ion-item>-->
+            <!--<label class="item item-input item-select">
+                <span class="input-label" style="color:#54223C;">Type</span>
+                <select>
+                <option>Blue</option>
+                <option selected>Green</option>
+                <option>Red</option>
+                </select>
+            </label>-->
+            <!--<div class="row item">
+                <div class="col">
+                    <label class="item item-input item-select item-stacked-label">
+                        <div class="input-label" style="color:#54223C;">Type</div>
+                        <select ng-model="tkt.type" ng-options="option.id as option.name for option in tkt.options | filter:{opt_group:'ticket_type'}" placeholder="Type"></select>
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-select item-stacked-label">
+                        <span class="input-label" style="color:#54223C;">Category</span>
+                        <select ng-model="tkt.category" ng-options="category for category in tkt.categories" placeholder="Category"></select>
+                    </label>
+                </div>
+                <div class="col"></div>
+            </div>-->
+            <label class="item item-input item-select item-stacked-label">
+                <span class="input-label">Type</span>
+                <select ng-model="tkt.type" name="type" ng-options="option.id as option.name for option in tkt.options | filter:{opt_group:'ticket_type'}" placeholder="Type" required></select>
+            </label>
+            <label class="item item-input item-select item-stacked-label">
+                <span class="input-label">Category</span>
+                <select ng-model="tkt.category" name="category" ng-options="category for category in tkt.categories" placeholder="Category" required></select>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Title</span>
+                <input ng-model="tkt.title" name="title" ng-minlength="10" type="text" required>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Description</span>
+                <textarea rows="5" ng-minlength="10" name="description" ng-model="tkt.description" required></textarea>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Urgent?</span>
+                                    <button ng-click="tkt.checkbox = !tkt.checkbox" style="background : url({{tkt.checkbox ? 'images/app/u64.png': 'images/app/u64a.png'}});">&ensp;</button>
+                <!--<input ng-model="tkt.priorityCheckBox" type="checkbox" ng-change="tkt.setPriority(tkt.priorityCheckBox)">-->
+
+            </label>
+            <div class="row">
+              <div class="col col-50">
+              <span class="input-label" style="margin-top: 20px; margin-left: 5px;">Attachments </span></div>
+                <div class="col col-50"><button class="button button-block" ngf-select ng-change="tkt.attachmentChanged(tkt.newAttachment)" ng-model="tkt.newAttachment" name="imagesButton" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="2MB" ngf-keep ngf-multiple="true"><span class="input-label"> Add </span></button></div>
+            </div>
+            <!-- <label class="item item-input item-stacked-label" style="padding-right: 20px;">
+              <span class="input-label">Attachments </span>
+                <button class="button button-block" ngf-select ng-change="tkt.attachmentChanged(tkt.newAttachment)" ng-model="tkt.newAttachment" name="imagesButton" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="2MB" ngf-keep ngf-multiple="true">Attach Images</button>
+                <div style="color:red" ng-repeat="file in tkt.attach"><img ngf-src="file" width="50px" height="50px"/><span>{{file.name}}</span><button>Remove</button></div>
+            </label> -->
+            <div class="row" ng-repeat="file in tkt.attach">
+
+                <div class = "col col-25">
+                  <!-- <img ngf-thumbnail="file || '/thumb.jpg'"> -->
+                  <img ngf-thumbnail="file" width="50px" height="50px"/>
+                </div>
+                <div class = "col col-50">{{file.name}}</div>
+                <div class = "col col-25"><button class="button button-small" ng-click="tkt.attach.splice($index,1)"><span class="input-label">Remove</span></button></div>
+            </div>
+
+            <!-- <label class="item item-input item-stacked-label">
+                <span class="input-label">Attachment</span>
+                <input ng-model="tkt.attach" type="file" ngf-select name="attach" accept="image/*" ngf-max-size="2MB" multiple ngf-model-invalid="tkt.fileError">
+            </label> -->
+            <div style="color:red" class="list" ng-if="tkt.fileError">
+                {{tkt.fileError}}
+            </div>
+            <div style="color:red" class="list" ng-if="tkt.serverSideErrorMessage">
+                {{tkt.serverSideErrorMessage.message}}
+            </div>
+
+            <div class="item error-block" ng-if="!addTicketForm.$pristine && (addTicketForm.$invalid || log.serverSideErrorMessage || tkt.propertyError)">
+                <!--<p ng-if="log.error">{{log.error}}</p>-->
+                <p ng-if="addTicketForm.type.$dirty && addTicketForm.type.$error.required">Select Type</p>
+
+                <p ng-if="tkt.propertyError">{{tkt.propertyError}}</p>
+
+                <p ng-if="addTicketForm.category.$dirty && addTicketForm.category.$error.required">Select Category</p>
+                <p ng-if="tkt.title.$dirty && tkt.title.$error.required">Title is required</p>
+                <p ng-if="addTicketForm.description.$dirty && addTicketForm.description.$error.required">Description is required</p>
+            </div>
+            <button ng-disabled="addTicketForm.$invalid" class="button button-block button-positive" multiple ng-click="tkt.uploadPic(tkt.attach)">
+                Add Ticket
+            </button>
+        </div>
+      </form>
+    </ion-content>
+</ion-view>

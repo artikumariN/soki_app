@@ -1,0 +1,19 @@
+{
+  "name": "HelloIonic",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.3.3"
+  },
+  "dependencies": {
+    "font-awesome": "fontawesome#^4.7.0",
+    "angular-pouchdb": "^5.0.0",
+    "pouchdb": "^6.2.0",
+    "angularLocalStorage": "ngStorage#^0.3.2",
+    "ng-file-upload": "^12.2.13",
+    "angular-loading-bar": "^0.9.0",
+    "ngstorage": "^0.3.11",
+    "cordova": "^3.4.0",
+    "ngMessage": "ng-message#^1.0.5-beta.1",
+    "WebFont-OpenSans": "webfont-opensans#^0.0.2"
+  }
+}

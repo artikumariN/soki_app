@@ -1,0 +1,124 @@
+<form name="makePayment">
+<div class="row h-list">
+    <!-- <div class="col">
+        <div class="h-lite padding" on-tap="ps.paymentMode = 'online'" ng-class="{'active': ps.paymentMode === 'online'}">
+            <i class="icon fa fa-laptop"></i> Online
+        </div>
+    </div> -->
+    <div class="col">
+        <div class="h-lite padding" name="paymentMode" on-tap="ps.paymentMode = '193'" ng-class="{'active': ps.paymentMode === '193'}">
+            <i class="icon fa fa-exchange"></i> Transfer
+        </div>
+    </div>
+    <div class="col">
+        <div class="h-lite padding" name="paymentMode" on-tap="ps.paymentMode = '191'" ng-class="{'active': ps.paymentMode === '191'}">
+            <i class="icon fa fa-pencil-square-o"></i> Cheque
+        </div>
+    </div>
+    <div class="col">
+        <div class="h-lite padding" name="paymentMode" on-tap="ps.paymentMode = '192'" ng-class="{'active': ps.paymentMode === '192'}">
+            <i class="icon fa fa-money"></i> Cash
+        </div>
+    </div>
+</div>
+
+<!-- Tabs Payment Online -->
+<div class="payment padding" ng-switch on="ps.paymentMode">
+    <!-- <div ng-switch-default="online">
+        <div class="padding">
+            <h3 style="margin-bottom:10px">Comments</h3>
+            <input type="text" style="width:100%" ng-model="ps.comments">
+        </div>
+    </div> -->
+
+    <!-- Tabs Payment Transfer -->
+    <div ng-switch-when="193">
+        <div class="padding">
+            <h3 style="margin-bottom:10px">Details</h3>
+            <textarea rows="5" ng-minlength="10" name="description" ng-model="ps.details193" required></textarea>
+            <!-- <input type="text" style="width:100%" ng-model="ps.comments"> -->
+        </div>
+    </div>
+
+    <!-- <div ng-switch-when="193">
+        <div class="padding">
+            <h3 style="margin-bottom:10px">Comments</h3>
+            <textarea rows="5" ng-minlength="10" name="description" ng-model="ps.comments193" required></textarea>
+        </div>
+    </div> -->
+    <div ng-switch-when="191">
+        <div class="padding">
+            <h3 style="margin-bottom:10px;">Details</h3>
+            <div class="list pad-fix">
+                <div class="item item-input-inset">
+                    <label class="item-input-wrapper no-bg inline-item">
+                        <input type="number" placeholder="Cheque No" ng-model="ps.chequeNo" name="chequeNo" class="input-line" required>
+                    </label>
+                    <label class="item-input-wrapper">
+                        <input type="date" placeholder="Handed on" ng-model="ps.chequeDate" name="chequeDate" class="input-line" required>
+                    </label>
+                </div>
+                <div class="item item-input-inset">
+                    <input type="text" placeholder="Bank Name" ng-model="ps.transBankName" name="transBankName" class="input-line" required>
+                </div>
+            </div>
+
+
+            <!-- <button class="button button-block button-positive" ng-click="tkt.uploadPic(tkt.attach)" multiple>
+                Attach a photo for record
+            </button> -->
+        </div>
+
+    </div>
+
+    <!-- Tabs Payment Cash -->
+    <div>
+        <div class="padding">
+            <h3 style="margin-bottom:10px">Comments</h3>
+            <textarea rows="5" ng-minlength="10" name="description" ng-model="ps.comments" required></textarea>
+            <!-- <input type="text" style="width:100%" ng-model="ps.comments"> -->
+        </div>
+    </div>
+</div>
+<h3 style="margin-bottom:10px;margin-left:20px;">Attachment</h3>
+<div class="col col-50">
+  <button class="button button-block button-positive" style="margin-left:10px;" ngf-select ng-change="ps.attachmentChanged(ps.newAttachment)" ng-model="ps.newAttachment" name="imagesButton" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="2MB" ngf-keep ngf-multiple="true"> Add </button>
+</div>
+
+  <div class="row" ng-repeat="file in ps.attach">
+      <div class = "col col-25">
+        <!-- <img ngf-thumbnail="file || '/thumb.jpg'"> -->
+        <img ngf-thumbnail="file" width="50px" height="50px"/>
+      </div>
+      <div class = "col col-50">{{file.name}}</div>
+      <div class = "col col-25"><button class="button button-small" ng-click="ps.attach.splice($index,1)"><span class="input-label">Remove</span></button></div>
+  </div>
+
+  <div class="item error-block" ng-if="ps.showPayButton">
+      <!--<p ng-if="log.error">{{log.error}}</p>-->
+      <p ng-if="!ps.skBalance">Amount Required</p>
+      <p ng-if="!ps.comments">Comments Required</p>
+      <!-- <p ng-if="makePayment.otherAmt.$dirty && makePayment.otherAmt.$error.required">Amount Required</p> -->
+      <!-- <p ng-if="makePayment.ps.otherAmt">{{tkt.propertyError}}</p> -->
+      <!-- <p ng-if="tkt.title.$dirty && tkt.title.$error.required">Title is required</p>
+      <p ng-if="addTicketForm.description.$dirty && addTicketForm.description.$error.required">Description is required</p> -->
+  </div>
+  <div class="item error-block">
+      <!-- <p ng-if="makePayment.chequeNo.$dirty && makePayment.chequeNo.$error.required">Cheque number required</p>
+      <p ng-if="makePayment.chequeDate.$dirty && makePayment.chequeDate.$error.required">Cheque number required</p>
+      <p ng-if="makePayment.transBankName.$dirty && makePayment.transBankName.$error.required">Cheque number required</p> -->
+      <p ng-if="!ps.chequeNo && ps.paymentMode == 191">Cheque number required</p>
+      <p ng-if="!ps.chequeDate && ps.paymentMode == 191">Cheque date required</p>
+      <p ng-if="!ps.transBankName && ps.paymentMode == 191">Transaction Bank required</p>
+      <p ng-if="!ps.details193 && ps.paymentMode == 193">Please enter details </p>
+  </div>
+<!-- Pay Button -->
+  <div class="item error-block">
+      <button class="button button-full button-positive" ng-click="ps.confirmPayment()" ng-if="!ps.showPayButton">
+          Make Payment
+      </button>
+      <button class="button button-full button-calm" ng-disabled="!ps.skBalance || makePayment.$invalid" ng-click="ps.makePayment()" ng-if="ps.showPayButton">
+          Confirm Payment
+      </button>
+  </div>
+</form>

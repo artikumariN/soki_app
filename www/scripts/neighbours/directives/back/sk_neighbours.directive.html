@@ -1,0 +1,20 @@
+<div class="neighbours directive">
+    <div class="list">
+        <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Type name or number to search" ng-model="nbrs.search">
+        </label>
+        <div ng-repeat="group in nbrs.groups | filter:nbrs.selected.society.id | filter:nbrs.selected.property.propId | filter:nbrs.search track by $index">
+            <ion-item class="item item-avatar" on-tap="nbrs.toggleGroup(group)" ng-class="{active: nbrs.isGroupShown(group)}">
+                <img ng-src="http://lorempixel.com/96/96/people">
+                <h2>{{group.name}}</h2>
+                <p>{{nbrs.swipe}}</p>
+            </ion-item>
+            <ion-item class="item-accordion" ng-repeat="(item, value) in group.details" ng-show="nbrs.isGroupShown(group)">
+                {{item}}
+                ||
+                {{value}}
+            </ion-item>
+        </div>
+    </div>
+</div>

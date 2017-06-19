@@ -1,0 +1,14 @@
+<ion-popover-view class="fit">
+    <ion-content>
+        <div class="list">
+            <div class="item header" on-tap="soc.clearskvSocieties()">{{soc.skTitle}}</div>
+            <div class="society" ng-repeat="society in soc.societies track by $index" ng-if="society.isActive">
+                <div class="item header" on-tap="soc.selectSoc(society)"><i class="fa fa-users"></i> {{society.name}}</div>
+                <div class="item property" on-tap="soc.selectProp(society,prop)" menu-close="" ng-repeat="prop in society.accessPoints track by $index" ng-if="prop.propId">
+                    <i class="fa" ng-class="soc.getPropIcon(prop.property.nature)"></i>{{prop.property.type}}
+                    #{{prop.property.name}}
+                </div>
+            </div>
+        </list>
+    </ion-content>
+</ion-popover-view>
